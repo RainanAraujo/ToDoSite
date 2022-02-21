@@ -2,7 +2,7 @@
   display: grid;
   grid-template-rows: 60px 1fr 60px;
   height: 100vh;
-  width: 100%;
+  width: 100;
 }
 
 header {
@@ -12,8 +12,7 @@ header {
 header #headerContent {
   padding: 0 40px;
   margin: 0 auto;
-
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,7 +33,7 @@ main {
   flex-direction: column;
 }
 
-.status {
+#status {
   margin: 24px 0;
   margin-left: 40px;
   padding: 18px;
@@ -44,17 +43,17 @@ main {
   border-radius: 14px;
 }
 
-.status .listItemStatus:not(:last-child) {
+#status .listItemStatus:not(:last-child) {
   margin-bottom: 8px;
 }
 
-.status .listItemStatus {
+#status .listItemStatus {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.status .listItemStatus span {
+#status .listItemStatus span {
   font-size: 1.4rem;
 }
 
@@ -65,6 +64,7 @@ main {
 }
 
 .contentToDosList {
+  cursor: grab;
   overflow-x: auto;
   display: flex;
   padding-bottom: 10px;
@@ -93,7 +93,7 @@ main {
   margin-right: 10px;
 }
 
-.toDoList #headerToDoList {
+.toDoList .headerToDoList {
   padding: 14px 18px;
   width: 100%;
   display: flex;
@@ -109,7 +109,7 @@ main {
   padding: 18px;
 }
 
-.toDoList #headerToDoList img {
+.toDoList .headerToDoList img {
   width: 20px;
   cursor: pointer;
 }
@@ -122,14 +122,14 @@ main {
   margin-bottom: 6px;
 }
 
-.toDoList .toDo #headerToDo {
+.toDoList .toDo .headerToDo {
   width: 100%;
   align-items: center;
   display: flex;
   margin-bottom: 12px;
 }
 
-.toDoList .toDo #headerToDo span {
+.toDoList .toDo .headerToDo span {
   font-weight: bold;
   font-size: 1.6rem;
   overflow: hidden;
@@ -139,7 +139,7 @@ main {
   white-space: nowrap;
 }
 
-.toDoList .toDo #headerToDo #levelIndicator {
+.toDoList .toDo .headerToDo .levelIndicator {
   background-color: #e74444;
   padding: 4px 8px;
   margin-left: 8px;
@@ -167,8 +167,7 @@ footer {
 footer #footerContent {
   padding: 0 40px;
   margin: 0 auto;
-
-  width: 100%;
+  /* width: 100%; */
   font-size: 1.4rem;
   font-weight: 300;
   height: 100%;
