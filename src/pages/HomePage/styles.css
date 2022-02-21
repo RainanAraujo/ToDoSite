@@ -1,7 +1,7 @@
 .container {
-  display: grid;
-  grid-template-rows: 1fr 60px;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
@@ -9,12 +9,15 @@ main {
   margin: 0 auto;
   max-width: 1280px;
   width: 100%;
+  flex-grow: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 main #imageHome {
-  width: 50%;
+  width: 40%;
 }
 
 .content {
@@ -34,7 +37,7 @@ main #imageHome {
 .content #descriptionText {
   margin: 10px 0;
   font-size: 1.4rem;
-  width: 400px;
+  width: 80%;
   line-height: 2.7rem;
   font-weight: 300;
 }
@@ -45,6 +48,7 @@ main #imageHome {
 }
 
 footer {
+  height: 60px;
   background-color: #1b1e29;
 }
 
@@ -58,4 +62,24 @@ footer #footerContent {
   height: 100%;
   align-items: center;
   display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .content {
+    align-items: center;
+  }
+
+  .content #largeText {
+    text-align: center;
+  }
+
+  .content #descriptionText {
+    text-align: center;
+  }
+
+  main #imageHome {
+    width: 80%;
+  }
 }
