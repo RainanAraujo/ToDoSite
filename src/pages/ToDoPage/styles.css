@@ -63,9 +63,10 @@ main {
   flex-grow: 1;
 }
 
-.contentToDosList {
+#contentToDosList {
   cursor: grab;
-  overflow-x: auto;
+  overflow-y: hidden;
+  overflow-x: scroll;
   display: flex;
   padding-bottom: 10px;
   margin-bottom: 30px;
@@ -79,7 +80,7 @@ main {
   right: 0;
 }
 
-.contentToDosList::-webkit-scrollbar {
+#contentToDosList::-webkit-scrollbar {
   display: none;
 }
 
