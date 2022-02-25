@@ -1,0 +1,27 @@
+body {
+  background-color: #101218 !important;
+}
+
+.navbar.navbar-light {
+  background-color: #292943;
+}
+
+.btn.btn-outline-success:hover {
+  background-color: #a29be2;
+}
+
+.bg-primary {
+  background-color: #a29be2 !important;
+}
+
+.bg-black {
+  background-color: #1b1e29 !important;
+}
+
+.border-primary {
+  background-color: #a29be2 !important;
+}
+
+.card.card-body {
+  background-color: #1b1e29 !important;
+}
