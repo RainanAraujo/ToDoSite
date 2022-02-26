@@ -2,11 +2,17 @@ const toDo = document.querySelectorAll(".toDo");
 const wrapperToDos = document.querySelectorAll(".wrapperToDos");
 const contentToDosList = document.getElementById("contentToDosList");
 
-contentToDosList.addEventListener("wheel", (e) => {
-  e.preventDefault();
+contentToDosList.addEventListener("wheel", (event) => {
+  event.preventDefault();
+
   contentToDosList.scrollBy({
-    left: e.deltaY < 0 ? 30 : -30,
+    left: event.deltaY < 0 ? -30 : 30,
   });
+});
+
+toDo.forEach((card) => {
+  card.addEventListener("dragstart", toDoDragStart);
+  card.addEventListener("dragend", toDoDragEnd);
 });
 
 wrapperToDos.forEach((wrapperToDos) => {
