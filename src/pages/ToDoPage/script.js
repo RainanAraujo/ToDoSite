@@ -1,12 +1,13 @@
 const wrapperToDos = document.querySelectorAll(".wrapperToDos");
 const modal = document.querySelector(".modal");
 const addToDoButton = document.getElementById("addToDo");
-const titleInput = document.getElementById("titleInput");
-const mainToDoList = document.getElementById("mainToDoList");
-const participantsInput = document.getElementById("participantsInput");
 const buttonCloseModal = document.getElementById("buttonCloseModal");
-const statusLengthList = document.getElementById("status");
+
 var toDo = document.querySelectorAll(".toDo");
+
+getColorDifficulty();
+getCountToDoLists();
+addEventListenerToDos();
 
 buttonCloseModal.addEventListener("click", () => {
   modal.style.display = "none";
@@ -16,9 +17,6 @@ addToDoButton.addEventListener("click", () => {
   modal.style.display = "flex";
 });
 
-getColorDifficulty();
-getCountToDoLists();
-addEventListenerToDos();
 function addEventListenerToDos() {
   toDo.forEach((card) => {
     card.addEventListener("dragstart", toDoDragStart);
@@ -52,6 +50,9 @@ function wrapperDragLeave() {
 }
 
 function addNewTodo() {
+  const titleInput = document.getElementById("titleInput");
+  const mainToDoList = document.getElementById("mainToDoList");
+  const participantsInput = document.getElementById("participantsInput");
   if (participantsInput.value != "" && titleInput.value != "") {
     const date = new Date();
     let difficulty;
@@ -83,6 +84,7 @@ function addNewTodo() {
 }
 
 function getCountToDoLists() {
+  const statusLengthList = document.getElementById("status");
   let countAllTodos = 0;
   wrapperToDos.forEach((wrapperToDos) => {
     countAllTodos += wrapperToDos.childElementCount;
