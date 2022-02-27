@@ -290,15 +290,31 @@ input[type="radio"] {
   background-color: #fff;
   border-radius: 18px;
   cursor: pointer;
-  margin-right: 4px;
-}
-
-input[type="radio"] + label {
-  margin: 0;
+  margin-right: 8px;
 }
 
 input[type="radio"]:checked {
   background-color: #a29be2;
   transition: 0.3s;
-  border: 3px #fff solid;
+  border: 4px #fff solid;
+}
+
+.optionRadio {
+  cursor: pointer;
+  padding: 14px 18px;
+  align-items: center;
+  display: flex;
+  border-radius: 8px;
+}
+
+.optionRadioEasy {
+  background-color: #6fe6a9;
+}
+
+.optionRadioMedium {
+  background-color: #ff9533;
+}
+
+.optionRadioHard {
+  background-color: #e74444;
 }

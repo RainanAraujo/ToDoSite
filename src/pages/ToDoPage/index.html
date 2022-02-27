@@ -21,24 +21,30 @@
           <label for="participantsInput">Participantes</label>
           <input type="text" id="participantsInput" />
           <div id="difficulty">
-            <div>
+            <label for="radioEasy" class="optionRadio optionRadioEasy">
               <input
                 type="radio"
                 name="difficulty"
                 id="radioEasy"
                 checked="checked"
-              />
-              <label for="">Fácil</label>
-            </div>
-            <div>
-              <input type="radio" name="difficulty" id="radioNormal" />
-              <label for="">Normal</label>
-            </div>
+              />Fácil</label
+            >
 
-            <div>
-              <input type="radio" name="difficulty" id="radioHard" />
-              <label for="">Difícil</label>
-            </div>
+            <label for="radioNormal" class="optionRadio optionRadioMedium">
+              <input
+                type="radio"
+                name="difficulty"
+                id="radioNormal"
+              />Normal</label
+            >
+
+            <label for="radioHard" class="optionRadio optionRadioHard">
+              <input
+                type="radio"
+                name="difficulty"
+                id="radioHard"
+              />Difícil</label
+            >
           </div>
 
           <input type="button" value="Criar Tarefa" onclick="addNewTodo()" />
