@@ -212,7 +212,7 @@ footer #footerContent {
 
 #containerModal {
   background-color: #1b1e29;
-  min-width: 400px;
+  width: 400px;
   border-radius: 10px;
   padding-bottom: 20px;
 }
@@ -300,8 +300,9 @@ input[type="radio"]:checked {
 }
 
 .optionRadio {
+  font-size: 14px;
   cursor: pointer;
-  padding: 14px 18px;
+  padding: 14px 16px;
   align-items: center;
   display: flex;
   border-radius: 8px;
@@ -317,4 +318,10 @@ input[type="radio"]:checked {
 
 .optionRadioHard {
   background-color: #e74444;
+}
+
+@media only screen and (max-width: 900px) {
+  #containerModal {
+    width: 90%;
+  }
 }
