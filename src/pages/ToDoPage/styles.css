@@ -2,7 +2,6 @@
   display: grid;
   grid-template-rows: 60px 1fr 60px;
   height: 100vh;
-  width: 100;
 }
 
 header {
@@ -58,19 +57,18 @@ main {
 }
 
 .wrapperContentTodoList {
-  margin-bottom: 30px;
+  margin-bottom: 8px;
   position: relative;
   flex-grow: 1;
 }
 
 #contentToDosList {
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: auto;
   display: flex;
   padding-bottom: 10px;
   margin-bottom: 30px;
   padding-left: 40px;
-  position: relative;
   white-space: nowrap;
   width: 100%;
   height: 100%;
@@ -79,13 +77,10 @@ main {
   right: 0;
 }
 
-#contentToDosList::-webkit-scrollbar {
-  display: none;
-}
-
 .toDoList {
   min-width: 310px;
   height: min-content;
+  max-height: 100%;
   background-color: #1b1e29;
   border-radius: 14px;
   display: flex;
@@ -99,14 +94,14 @@ main {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
   font-weight: bold;
   font-size: 1.6rem;
   align-items: center;
 }
 
 .toDoList .wrapperToDos {
-  overflow-y: auto;
+  position: relative;
+  overflow: auto;
   padding: 18px;
   min-height: 100px;
   transition: 0.3s;
@@ -149,7 +144,6 @@ main {
 }
 
 .toDoList .toDo .headerToDo .levelIndicator {
-  background-color: #e74444;
   padding: 4px 8px;
   margin-left: 8px;
   font-size: 1rem;
@@ -188,4 +182,123 @@ footer #footerContent {
 
 .dragging {
   opacity: 0.3;
+}
+
+.modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: #10121830;
+  z-index: 1;
+  backdrop-filter: blur(2px);
+  animation-name: openModalAnim;
+  animation-duration: 0.3s;
+  display: none;
+}
+
+@keyframes openModalAnim {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#containerModal {
+  background-color: #1b1e29;
+  min-width: 400px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+
+#headerModal {
+  font-weight: 500;
+  font-size: 20px;
+  position: relative;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttonCloseModal {
+  cursor: pointer;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+label {
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+input[type="text"] {
+  border: none;
+  background-color: #101218;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+input[type="button"] {
+  margin-top: 12px;
+  background-color: #a29be2;
+  font-weight: 500;
+  font-size: 18px;
+  border: none;
+  padding: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+input[type="button"]:hover {
+  background-color: #a29be240;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+#difficulty {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#difficulty div {
+  align-items: center;
+  display: flex;
+}
+
+input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 18px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+input[type="radio"] + label {
+  margin: 0;
+}
+
+input[type="radio"]:checked {
+  background-color: #a29be2;
+  transition: 0.3s;
+  border: 3px #fff solid;
 }

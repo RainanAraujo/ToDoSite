@@ -8,6 +8,43 @@
     <title>ToDoSite</title>
   </head>
   <body>
+    <div class="modal">
+      <div id="containerModal">
+        <div id="headerModal">
+          Nova Tarefa
+          <img id="buttonCloseModal" src="../../assets//x.svg" alt="" />
+        </div>
+        <hr />
+        <form action="" method="post">
+          <label for="titleInput">Título</label>
+          <input type="text" id="titleInput" />
+          <label for="participantsInput">Participantes</label>
+          <input type="text" id="participantsInput" />
+          <div id="difficulty">
+            <div>
+              <input
+                type="radio"
+                name="difficulty"
+                id="radioEasy"
+                checked="checked"
+              />
+              <label for="">Fácil</label>
+            </div>
+            <div>
+              <input type="radio" name="difficulty" id="radioNormal" />
+              <label for="">Normal</label>
+            </div>
+
+            <div>
+              <input type="radio" name="difficulty" id="radioHard" />
+              <label for="">Difícil</label>
+            </div>
+          </div>
+
+          <input type="button" value="Criar Tarefa" onclick="addNewTodo()" />
+        </form>
+      </div>
+    </div>
     <div class="container">
       <header>
         <div id="headerContent">Tarefas</div>
@@ -16,11 +53,11 @@
         <div id="status">
           <div class="listItemStatus">
             <span>Todas as tarefas:</span>
-            <span>2</span>
+            <span>0</span>
           </div>
           <div class="listItemStatus">
             <span>Finalizadas:</span>
-            <span>1</span>
+            <span>0</span>
           </div>
           <div class="listItemStatus">
             <span>Excluídas:</span>
@@ -31,13 +68,13 @@
           <div id="contentToDosList">
             <div class="toDoList">
               <div class="headerToDoList">
-                Tarefas <img src="../../assets/plus-circle.svg" />
+                Tarefas <img id="addToDo" src="../../assets/plus-circle.svg" />
               </div>
               <hr />
-              <div class="wrapperToDos">
+              <div class="wrapperToDos" id="mainToDoList">
                 <div class="toDo" draggable="true">
                   <div class="headerToDo">
-                    <span> Prova 2 Programação web</span>
+                    <span> Prova 3 Programação web</span>
                     <div class="levelIndicator">Difícil</div>
                   </div>
                   <div class="infoToDo">Participante: <span>Rainan</span></div>
@@ -63,6 +100,16 @@
               <div class="wrapperToDos">
                 <div class="toDo" draggable="true">
                   <div class="headerToDo">
+                    <span> Prova 2 Programação web</span>
+                    <div class="levelIndicator">Difícil</div>
+                  </div>
+                  <div class="infoToDo">Participante: <span>Rainan</span></div>
+                  <div class="infoToDo">
+                    Data de criação: <span>20/02/2022</span>
+                  </div>
+                </div>
+                <div class="toDo" draggable="true">
+                  <div class="headerToDo">
                     <span> Prova 1 Programação web</span>
                     <div class="levelIndicator">Difícil</div>
                   </div>
@@ -82,6 +129,6 @@
         </div>
       </footer>
     </div>
-    <script src="script.js" />
+    <script src="script.js" defer />
   </body>
 </html>
