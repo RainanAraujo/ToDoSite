@@ -17,12 +17,7 @@ var toDos = [{}];
   generateToDos();
 })();
 
-getColorDifficulty();
-getCountToDoLists();
-addEventListenerToDos();
-
 async function generateToDos() {
-  console.log(toDos);
   wrapperToDos.forEach((item) => (item.innerHTML = ""));
   toDos.map((toDo) => {
     wrapperToDos.forEach((wrapperToDo) => {
@@ -39,20 +34,11 @@ async function generateToDos() {
       }
     });
   });
-  toDo = document.querySelectorAll(".toDo");
+
   addEventListenerToDos();
   getCountToDoLists();
   getColorDifficulty();
-  const buttonRemoveToDo = document.querySelectorAll("#buttonTrash");
-  buttonRemoveToDo.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      deleteToDo(e.target.parentNode.getAttribute("id"));
-      toDos = toDos.filter((toDoItem) => {
-        return toDoItem.id != e.target.parentNode.getAttribute("id");
-      });
-      generateToDos();
-    });
-  });
+  addEventListenerButtonsRemove();
 }
 
 const renderItem = (id, title, levelIndicator, participants, createDate) => {
@@ -69,10 +55,7 @@ const renderItem = (id, title, levelIndicator, participants, createDate) => {
   <div class="infoToDo">
     Data de criação: <span>${createDate}</span>
   </div>
-  <img
-  id="buttonTrash"
-  src="../../assets/trash.svg"
-  alt=""/>
+  <img id="buttonTrash" src="../../assets/trash.svg" alt=""/>
   `;
   return toDoItem;
 };
@@ -89,9 +72,23 @@ addToDoButton.addEventListener("click", () => {
   addNewTodo();
 });
 
+function addEventListenerButtonsRemove() {
+  const buttonRemoveToDo = document.querySelectorAll("#buttonTrash");
+  buttonRemoveToDo.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      deleteToDo(e.target.parentNode.getAttribute("id"));
+      toDos = toDos.filter((toDoItem) => {
+        return toDoItem.id != e.target.parentNode.getAttribute("id");
+      });
+      generateToDos();
+    });
+  });
+}
+
 async function addNewTodo() {
   const titleInput = document.getElementById("titleInput");
   const participantsInput = document.getElementById("participantsInput");
+
   function getDifficulty() {
     if (document.getElementById("radioEasy").checked) {
       return "Fácil";
@@ -114,12 +111,12 @@ async function addNewTodo() {
       currentDate
     )
       .then(async () => {
-        participantsInput.value = "";
-        titleInput.value = "";
         toDos = await getToDos();
         generateToDos();
-        addToDoButton.removeAttribute("disabled");
         modal.style.display = "none";
+        participantsInput.value = "";
+        titleInput.value = "";
+        addToDoButton.removeAttribute("disabled");
       })
       .catch((e) => {
         console.log(e);
@@ -133,6 +130,7 @@ async function addNewTodo() {
 //Drag And Drop
 
 function addEventListenerToDos() {
+  toDo = document.querySelectorAll(".toDo");
   toDo.forEach((card) => {
     card.addEventListener("dragstart", toDoDragStart);
     card.addEventListener("dragend", toDoDragEnd);
@@ -172,11 +170,10 @@ async function wrapperDragDrop() {
       indexToDoDragged = i;
     }
   });
-  toDos[indexToDoDragged].data.typeList =
-    this.parentNode.childNodes[1].childNodes[0].textContent;
+  toDos[indexToDoDragged].data.typeList = this.getAttribute("id");
   await alterListToDo(
     document.querySelector(".dragging").getAttribute("id"),
-    this.parentNode.childNodes[1].childNodes[0].textContent
+    this.getAttribute("id")
   );
 }
 
