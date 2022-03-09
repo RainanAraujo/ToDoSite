@@ -12,7 +12,7 @@
       <div id="containerModal">
         <div id="headerModal">
           Nova Tarefa
-          <img id="buttonCloseModal" src="../../assets//x.svg" alt="" />
+          <img id="buttonCloseModal" src="../../assets/x.svg" alt="" />
         </div>
         <hr />
         <form action="" method="post">
@@ -47,7 +47,7 @@
             >
           </div>
 
-          <input type="button" value="Criar Tarefa" onclick="addNewTodo()" />
+          <input type="button" value="Criar Tarefa" id="addToDo" />
         </form>
       </div>
     </div>
@@ -66,7 +66,7 @@
             <span>0</span>
           </div>
           <div class="listItemStatus">
-            <span>Excluídas:</span>
+            <span>Arquivadas:</span>
             <span>0</span>
           </div>
         </div>
@@ -74,57 +74,27 @@
           <div id="contentToDosList">
             <div class="toDoList">
               <div class="headerToDoList">
-                Tarefas <img id="addToDo" src="../../assets/plus-circle.svg" />
+                Tarefas
+                <img id="openModalNewToDo" src="../../assets/plus-circle.svg" />
               </div>
               <hr />
-              <div class="wrapperToDos" id="mainToDoList">
-                <div class="toDo" draggable="true">
-                  <div class="headerToDo">
-                    <span> Prova 3 Programação web</span>
-                    <div class="levelIndicator">Difícil</div>
-                  </div>
-                  <div class="infoToDo">Participante: <span>Rainan</span></div>
-                  <div class="infoToDo">
-                    Data de criação: <span>20/02/2022</span>
-                  </div>
-                </div>
-              </div>
+
+              <div class="wrapperToDos" id="Tarefas"></div>
             </div>
             <div class="toDoList">
               <div class="headerToDoList">Em Progresso</div>
               <hr />
-              <div class="wrapperToDos"></div>
+              <div class="wrapperToDos" id="Em Progresso"></div>
             </div>
             <div class="toDoList">
-              <div class="headerToDoList">Excluídas</div>
+              <div class="headerToDoList">Arquivadas</div>
               <hr />
-              <div class="wrapperToDos"></div>
+              <div class="wrapperToDos" id="Arquivadas"></div>
             </div>
             <div class="toDoList">
               <div class="headerToDoList">Finalizadas</div>
               <hr />
-              <div class="wrapperToDos">
-                <div class="toDo" draggable="true">
-                  <div class="headerToDo">
-                    <span> Prova 2 Programação web</span>
-                    <div class="levelIndicator">Difícil</div>
-                  </div>
-                  <div class="infoToDo">Participante: <span>Rainan</span></div>
-                  <div class="infoToDo">
-                    Data de criação: <span>20/02/2022</span>
-                  </div>
-                </div>
-                <div class="toDo" draggable="true">
-                  <div class="headerToDo">
-                    <span> Prova 1 Programação web</span>
-                    <div class="levelIndicator">Difícil</div>
-                  </div>
-                  <div class="infoToDo">Participante: <span>Rainan</span></div>
-                  <div class="infoToDo">
-                    Data de criação: <span>20/02/2022</span>
-                  </div>
-                </div>
-              </div>
+              <div class="wrapperToDos" id="Finalizadas"></div>
             </div>
           </div>
         </div>
@@ -135,6 +105,16 @@
         </div>
       </footer>
     </div>
-    <script src="script.js" defer type="text/javascript"></script>
+    <script
+      type="module"
+      src="../../services/firabase.js"
+      type="text/javascript"
+    ></script>
+    <script
+      type="module"
+      src="../../services/firestore.js"
+      type="text/javascript"
+    ></script>
+    <script type="module" src="script.js" type="text/javascript"></script>
   </body>
 </html>

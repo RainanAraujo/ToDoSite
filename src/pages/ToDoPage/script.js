@@ -1,21 +1,136 @@
+import {
+  setToDo,
+  getToDos,
+  deleteToDo,
+  alterListToDo,
+} from "../../services/firestore.js";
 const wrapperToDos = document.querySelectorAll(".wrapperToDos");
 const modal = document.querySelector(".modal");
+const openModalButton = document.getElementById("openModalNewToDo");
 const addToDoButton = document.getElementById("addToDo");
 const buttonCloseModal = document.getElementById("buttonCloseModal");
-
 var toDo = document.querySelectorAll(".toDo");
+var toDos = [{}];
+
+(async () => {
+  toDos = await getToDos();
+  generateToDos();
+})();
 
 getColorDifficulty();
 getCountToDoLists();
 addEventListenerToDos();
 
+async function generateToDos() {
+  console.log(toDos);
+  wrapperToDos.forEach((item) => (item.innerHTML = ""));
+  toDos.map((toDo) => {
+    wrapperToDos.forEach((wrapperToDo) => {
+      if (wrapperToDo.getAttribute("id") == toDo.data.typeList) {
+        wrapperToDo.appendChild(
+          renderItem(
+            toDo.id,
+            toDo.data.title,
+            toDo.data.levelIndicator,
+            toDo.data.participants,
+            toDo.data.createDate
+          )
+        );
+      }
+    });
+  });
+  toDo = document.querySelectorAll(".toDo");
+  addEventListenerToDos();
+  getCountToDoLists();
+  getColorDifficulty();
+  const buttonRemoveToDo = document.querySelectorAll("#buttonTrash");
+  buttonRemoveToDo.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      deleteToDo(e.target.parentNode.getAttribute("id"));
+      toDos = toDos.filter((toDoItem) => {
+        return toDoItem.id != e.target.parentNode.getAttribute("id");
+      });
+      generateToDos();
+    });
+  });
+}
+
+const renderItem = (id, title, levelIndicator, participants, createDate) => {
+  const toDoItem = document.createElement("div");
+  toDoItem.className = "toDo";
+  toDoItem.setAttribute("draggable", "true");
+  toDoItem.setAttribute("id", id);
+  toDoItem.innerHTML = `   
+  <div class="headerToDo">
+    <span> ${title}</span>
+    <div class="levelIndicator">${levelIndicator}</div>
+  </div>
+  <div class="infoToDo">Participante: <span>${participants}</span></div>
+  <div class="infoToDo">
+    Data de criação: <span>${createDate}</span>
+  </div>
+  <img
+  id="buttonTrash"
+  src="../../assets/trash.svg"
+  alt=""/>
+  `;
+  return toDoItem;
+};
+
 buttonCloseModal.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-addToDoButton.addEventListener("click", () => {
+openModalButton.addEventListener("click", () => {
   modal.style.display = "flex";
 });
+
+addToDoButton.addEventListener("click", () => {
+  addNewTodo();
+});
+
+async function addNewTodo() {
+  const titleInput = document.getElementById("titleInput");
+  const participantsInput = document.getElementById("participantsInput");
+  function getDifficulty() {
+    if (document.getElementById("radioEasy").checked) {
+      return "Fácil";
+    } else if (document.getElementById("radioNormal").checked) {
+      return "Normal";
+    } else {
+      return "Difícil";
+    }
+  }
+
+  if (participantsInput.value != "" && titleInput.value != "") {
+    const date = new Date();
+    const currentDate =
+      date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    addToDoButton.setAttribute("disabled", true);
+    await setToDo(
+      titleInput.value,
+      getDifficulty(),
+      participantsInput.value,
+      currentDate
+    )
+      .then(async () => {
+        participantsInput.value = "";
+        titleInput.value = "";
+        toDos = await getToDos();
+        generateToDos();
+        addToDoButton.removeAttribute("disabled");
+        modal.style.display = "none";
+      })
+      .catch((e) => {
+        console.log(e);
+        addToDoButton.removeAttribute("disabled");
+      });
+  } else {
+    alert("Preencha todos os campos.");
+  }
+}
+
+//Drag And Drop
 
 function addEventListenerToDos() {
   toDo.forEach((card) => {
@@ -27,7 +142,7 @@ function addEventListenerToDos() {
 wrapperToDos.forEach((wrapperToDos) => {
   wrapperToDos.addEventListener("dragover", wrapperDragOver);
   wrapperToDos.addEventListener("dragleave", wrapperDragLeave);
-  wrapperToDos.addEventListener("drop", wrapperDragLeave);
+  wrapperToDos.addEventListener("drop", wrapperDragDrop);
 });
 
 function toDoDragStart() {
@@ -49,38 +164,20 @@ function wrapperDragLeave() {
   this.classList.remove("wrapperToDosDrawable");
 }
 
-function addNewTodo() {
-  const titleInput = document.getElementById("titleInput");
-  const mainToDoList = document.getElementById("mainToDoList");
-  const participantsInput = document.getElementById("participantsInput");
-  if (participantsInput.value != "" && titleInput.value != "") {
-    const date = new Date();
-    let difficulty;
-    const newToDo = toDo[0].cloneNode(true);
-    modal.style.display = "none";
-    newToDo.childNodes[1].childNodes[1].textContent = titleInput.value;
-    newToDo.childNodes[3].childNodes[1].textContent = participantsInput.value;
-    newToDo.childNodes[5].childNodes[1].textContent =
-      date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-
-    if (document.getElementById("radioEasy").checked) {
-      difficulty = "Fácil";
-    } else if (document.getElementById("radioNormal").checked) {
-      difficulty = "Normal";
-    } else {
-      difficulty = "Difícil";
+async function wrapperDragDrop() {
+  this.classList.remove("wrapperToDosDrawable");
+  let indexToDoDragged;
+  toDos.some((el, i) => {
+    if (el.id == document.querySelector(".dragging").getAttribute("id")) {
+      indexToDoDragged = i;
     }
-    newToDo.childNodes[1].childNodes[3].childNodes[0].textContent = difficulty;
-    mainToDoList.appendChild(newToDo);
-    toDo = document.querySelectorAll(".toDo");
-    addEventListenerToDos();
-    participantsInput.value = "";
-    titleInput.value = "";
-    getCountToDoLists();
-    getColorDifficulty();
-  } else {
-    alert("Preencha todos os campos.");
-  }
+  });
+  toDos[indexToDoDragged].data.typeList =
+    this.parentNode.childNodes[1].childNodes[0].textContent;
+  await alterListToDo(
+    document.querySelector(".dragging").getAttribute("id"),
+    this.parentNode.childNodes[1].childNodes[0].textContent
+  );
 }
 
 function getCountToDoLists() {

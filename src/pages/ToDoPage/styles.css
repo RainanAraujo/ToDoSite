@@ -121,9 +121,10 @@ main {
   background-color: #101218;
   padding: 16px;
   border-radius: 8px;
-  cursor: grab;
+  cursor: pointer;
   margin-bottom: 6px;
   transition: 0.3s;
+  position: relative;
 }
 
 .toDoList .toDo .headerToDo {
@@ -324,4 +325,11 @@ input[type="radio"]:checked {
   #containerModal {
     width: 90%;
   }
+}
+
+#buttonTrash {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  height: 16px;
 }
