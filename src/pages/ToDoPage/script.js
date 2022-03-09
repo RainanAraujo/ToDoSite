@@ -34,7 +34,6 @@ async function generateToDos() {
       }
     });
   });
-
   addEventListenerToDos();
   getCountToDoLists();
   getColorDifficulty();
